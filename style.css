@@ -56,3 +56,42 @@ form label {
   grid-template-columns: subgrid;
   grid-column: 1;
 }
+  
+  form input,
+  form textarea {
+    grid-column: 2;
+  }
+  
+  form button {
+    grid-column: 1 / -1;
+  }
+  
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+    gap: 1em;
+  }
+  
+  .projects article {
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    gap: 1em;
+  }
+  
+  .projects h2 {
+    margin: 0;
+  }
+  
+  h1 {
+    font-size: 300%;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.1;
+  }
+  

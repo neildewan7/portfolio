@@ -7,33 +7,35 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
+    
     <nav>
-        <ul>
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="../resume/index.html">Resume</a></li>
-            <li><a href="../projects/index.html">Projects</a></li>
-            <li><a href="../contact/index.html">Contact</a></li>
-            <li><a href="https://github.com/neildewan7" target="_blank">GitHub Profile</a></li>
-        </ul>
+        <a href="../index.html">Home</a>
+        <a href="../resume/index.html">Resume</a>
+        <a href="../projects/index.html">Projects</a>
+        <a href="../contact/index.html" class="current">Contact</a>
+        <a href="https://github.com/neildewan7" target="_blank">GitHub Profile</a>
     </nav>
-    <h1>Contacts</h1>
-
-    <!-- Contact Form -->
+    <h1>Contact</h1>
     <form action="mailto:ndewan@ucsd.edu" method="POST" enctype="text/plain">
         <!-- Email Field -->
         <label for="email">Your Email:</label>
-        <input id="email" name="email" type="email" required>
+        <input id="email" name="email" type="email" value="ndewan@ucsd.edu" required>
 
         <!-- Subject Field -->
         <label for="subject">Subject:</label>
-        <input id="subject" name="subject">
+        <input id="subject" name="subject" value="Hello">
 
         <!-- Message Field -->
         <label for="body">Message:</label>
-        <textarea id="body" name="body"></textarea>
+        <textarea id="body" name="body">Sup</textarea>
 
         <!-- Submit Button -->
         <button>Send Email</button>
     </form>
+
+    <!-- Footer -->
+    <footer>
+        © 2025 Neil Dewan
+    </footer>
 </body>
 </html>
