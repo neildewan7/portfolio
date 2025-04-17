@@ -107,7 +107,7 @@ h6 {
 #skills-interests {
   margin-top: 2.5em;
   padding: 1.5em;
-  background-color: color-mix(in oklch, var(--color-accent), canvas 95%);
+  background-color: color-mix(in oklch, var(--color-accent), canvas 70%);
   border-radius: 0.75em;
   box-shadow: 0 0.2em 0.5em oklch(0% 0 0 / 0.1);
 }
