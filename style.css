@@ -1,45 +1,49 @@
 html {
-    --color-accent: oklch(25% 0.1 240);
-    color-scheme: light dark;
-  }
-  
-  body {
-    font: 100%/1.5 system-ui;
-    max-width: 100ch;
-    margin-inline: max(1em, (100% - 100ch) / 2);
-    padding: 0 1em;
-    accent-color: var(--color-accent);
-  }
-  
-  nav {
-    display: flex;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    --border-color: oklch(25% 0.1 240);
-    border-bottom-color: var(--border-color);
-  }
-  
-  nav a {
-    flex: 1;
-    text-decoration: none;
-    color: inherit;
-    text-align: center;
-    padding: 0.5em;
-  }
-  
-  nav a.current {
-    border-bottom-width: 0.4em;
-    border-bottom-style: solid;
-    border-bottom-color: var(--border-color);
-  }
-  
-  nav a:hover {
-    border-bottom-width: 0.4em;
-    border-bottom-style: solid;
-    border-bottom-color: var(--border-color);
-    background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
-  }
-  nav ul,
+  --color-accent: oklch(25% 0.1 240);
+  color-scheme: light dark;
+}
+
+body {
+  font: 100%/1.5 system-ui;
+  max-width: 100ch;
+  margin-inline: max(1em, (100% - 100ch) / 2);
+  padding: 0 1em;
+  accent-color: var(--color-accent);
+  color: canvastext;
+  background-color: canvas;
+}
+
+nav {
+  display: flex;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  --border-color: oklch(50% 10% 240 / 40%);
+  border-bottom-color: var(--border-color);
+}
+
+nav a {
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  padding: 0.5em;
+}
+
+nav a.current {
+  border-bottom-width: 0.4em;
+  border-bottom-style: solid;
+  border-bottom-color: var(--border-color);
+}
+
+nav a:hover {
+  border-bottom-width: 0.4em;
+  border-bottom-style: solid;
+  border-bottom-color: var(--border-color);
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
+}
+
+
+nav ul,
 nav li {
   display: contents;
 }
@@ -56,45 +60,45 @@ form label {
   grid-template-columns: subgrid;
   grid-column: 1;
 }
-  
-  form input,
-  form textarea {
-    grid-column: 2;
-  }
-  
-  form button {
-    grid-column: 1 / -1;
-  }
-  
-  .projects {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
-    gap: 1em;
-  }
-  
-  .projects article {
-    grid-template-rows: subgrid;
-    grid-row: span 3;
-    gap: 1em;
-  }
-  
-  .projects h2 {
-    margin: 0;
-  }
-  
-  h1 {
-    font-size: 300%;
-  }
-  
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    line-height: 1.1;
-  }
-  
+
+form input,
+form textarea {
+  grid-column: 2;
+}
+
+form button {
+  grid-column: 1 / -1;
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  gap: 1em;
+}
+
+.projects article {
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+  gap: 1em;
+}
+
+.projects h2 {
+  margin: 0;
+}
+
+h1 {
+  font-size: 300%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.1;
+}
+
 /* Resume-specific styles */
 #personal-info,
 #education,
@@ -103,7 +107,7 @@ form label {
 #skills-interests {
   margin-top: 2.5em;
   padding: 1.5em;
-  background-color: color-mix(in oklch, white, var(--color-accent) 5%);
+  background-color: color-mix(in oklch, var(--color-accent), canvas 95%);
   border-radius: 0.75em;
   box-shadow: 0 0.2em 0.5em oklch(0% 0 0 / 0.1);
 }
@@ -146,14 +150,14 @@ form label {
 
 .skills li {
   padding: 0.25em 0;
-  border-bottom: 1px dashed oklch(80% 0 240 / 0.3);
+  border-bottom: 1px dashed color-mix(in oklch, var(--color-accent), canvastext 20%);
 }
 
 footer#footer {
   margin-top: 4em;
   text-align: center;
   font-size: 0.875em;
-  color: oklch(60% 0.1 240);
+  color: color-mix(in oklch, canvastext, var(--color-accent) 30%);
   padding: 1em 0;
   border-top: 1px solid oklch(80% 0.1 240 / 0.4);
 }
@@ -164,4 +168,22 @@ section header h2 {
   border-bottom: 2px solid var(--color-accent);
   padding-bottom: 0.25em;
   margin-bottom: 0.75em;
+}
+
+/* Theme switcher */
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 80%;
+  font-family: inherit;
+  background-color: canvas;
+  padding: 0.25em 0.5em;
+  border-radius: 0.5em;
+  box-shadow: 0 0.1em 0.3em oklch(0% 0 0 / 0.2);
+  color: canvastext;
+}
+
+.color-scheme select {
+  font: inherit;
 }
