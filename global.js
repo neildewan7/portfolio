@@ -4,35 +4,6 @@ function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
-// let pages = [
-//   { url: "/", title: "Home" },
-//   { url: "projects/", title: "Projects" },
-//   { url: "cv-resume/", title: "CV/Resume" },
-//   { url: "contact/", title: "Contact" },
-//   { url: "meta/", title: "Meta" },
-//   { url: "https://github.com/katelyn-zhao", title: "GitHub" },
-// ];
-
-// let nav = document.createElement("nav");
-// document.body.prepend(nav);
-
-// const ARE_WE_HOME = document.documentElement.classList.contains("home");
-
-// for (let p of pages) {
-//   let url = p.url;
-//   let title = p.title;
-//   url = !ARE_WE_HOME && !url.startsWith("http") ? "../" + url : url;
-//   let a = document.createElement("a");
-//   a.href = url;
-//   a.textContent = title;
-//   nav.append(a);
-//   if (a.host == location.host && a.pathname === location.pathname) {
-//     a.classList.add("current");
-//   }
-//   if (a.host !== location.host) {
-//     a.target = "_blank";
-//   }
-// }
 
 const BASE_PATH =
   location.hostname === "localhost" || location.hostname === "127.0.0.1"
@@ -42,7 +13,7 @@ const BASE_PATH =
 let pages = [
   { url: "", title: "Home" },
   { url: "projects/", title: "Projects" },
-  { url: "Resume/", title: "Resume" },
+  { url: "resume/", title: "Resume" },
   { url: "contact/", title: "Contact" },
   { url: "https://github.com/neildewan7", title: "GitHub" }
 ];
