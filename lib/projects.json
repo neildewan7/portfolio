@@ -1,61 +1,73 @@
 [
     {
-        "title": "Lorem ipsum dolor sit.",
+        "title": "Food Rating Prediction",
+        "year": 2025,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum dolor sit."
+        "description": "Predicting recipe rating using features of a recipe."
     },
     {
-        "title": "Odio qui nostrum accusantium.",
+        "title": "Image Processing Algorithm",
+        "year": 2024,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Nulla mollitia quibusdam ratione."
+        "description": "DSC20 project using python."
     },
     {
-        "title": "Quia a repellendus cum!",
+        "title": "Song Recommendation Algorithm",
+        "year": 2023,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Obcaecati quasi voluptates esse!"
+        "description": "DSC10 spotify project using pandas."
     },
     {
-        "title": "Itaque eveniet ab accusantium.",
+        "title": "Portfolio website",
+        "year": 2025,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Suscipit autem eum consequuntur?"
+        "description": "DSC106 project using HTML, CSS and JS."
     },
     {
-        "title": "Natus dolorum hic fugiat!",
+        "title": "DSC106 Project 1",
+        "year": 2025,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Nulla voluptatem beatae doloribus?"
+        "description": "Creating Data Visualization."
     },
     {
-        "title": "Sunt animi nihil obcaecati.",
+        "title": "DSC106 Project 2",
+        "year": 2025,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Quo fugit itaque sint!"
+        "description": "Creating Data Visualization."
     },
     {
-        "title": "Ab iste reprehenderit aspernatur!",
+        "title": "San Diego Bus Route Mapping",
+        "year": 2025,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Architecto voluptatum impedit iste!"
+        "description": "Finding optimal bus routes using the MTS dataset."
     },
     {
-        "title": "Autem mollitia repudiandae nobis.",
+        "title": "N-Gram Language Model",
+        "year": 2025,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Quasi inventore illum numquam?"
+        "description": "DSC80 project using python and pandas."
     },
     {
-        "title": "Ipsam facilis enim quos.",
+        "title": "DSC80 Project",
+        "year": 2025,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Excepturi enim illum cum."
     },
     {
-        "title": "Excepturi perferendis laborum minima!",
+        "title": "Data Science Project",
+        "year": 2025,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Quae praesentium omnis a."
     },
     {
-        "title": "Recusandae asperiores quo suscipit.",
+        "title": "Data Science Project",
+        "year": 2025,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Aspernatur, itaque quod! Excepturi!"
     },
     {
-        "title": "Laborum recusandae repellat sunt.",
+        "title": "Data Science Project",
+        "year": 2025,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Repellat nihil dicta ducimus!"
     }
