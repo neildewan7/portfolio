@@ -237,3 +237,34 @@ section header h2 {
   border-radius: 50%;
   background-color: var(--color);
 }
+
+path {
+  cursor: pointer;
+  transition: 300ms;
+}
+
+svg:has(path:hover) path:not(:hover) {
+  opacity: 0.5;
+}
+
+.selected {
+  --color: oklch(60% 45% 0) !important;
+}
+
+.selected path {
+  fill: var(--color);
+}
+
+.legend .selected {
+  background-color: var(--color);
+  color: white;
+  font-weight: bold;
+}
+
+.legend .swatch {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background-color: var(--color);
+}
