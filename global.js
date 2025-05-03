@@ -25,10 +25,10 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
 
     // Use a dynamic heading tag (e.g., h2, h3, etc.)
     article.innerHTML = `
-      <${headingLevel}>${project.title}</${headingLevel}>
-      <img src="${project.image}" alt="${project.title}">
-      <p>${project.description}</p>
-    `;
+  <${headingLevel}>${project.title} <span style="font-size: 0.8em; color: gray;">(${project.year})</span></${headingLevel}>
+  <img src="${project.image}" alt="${project.title}">
+  <p>${project.description}</p>
+`;
 
     // Append the article to the container
     containerElement.appendChild(article);

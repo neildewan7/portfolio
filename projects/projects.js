@@ -1,3 +1,4 @@
+
 import { fetchJSON, renderProjects } from '../global.js';
 
 const projects = await fetchJSON('../lib/projects.json');
@@ -10,3 +11,4 @@ const projectCountElement = document.querySelector('#project-count');
 if (projectCountElement) {
   projectCountElement.textContent = projects.length;
 }
+
