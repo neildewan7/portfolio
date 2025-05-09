@@ -109,7 +109,9 @@ function renderScatterPlot(commits) {
     .attr('transform', `translate(${margin.left}, 0)`)
     .call(d3.axisLeft(yScale).tickFormat(d => String(d % 24).padStart(2, '0') + ':00'));
 
-  svg.selectAll('circle')
+  const dotsGroup = svg.append('g').attr('class', 'dots');
+
+  dotsGroup.selectAll('circle')
     .data(commits)
     .join('circle')
     .attr('cx', d => xScale(d.datetime))
@@ -129,7 +131,7 @@ function renderScatterPlot(commits) {
       d3.select(event.currentTarget).style('fill-opacity', 0.7);
     });
 
-  addBrush(svg, xScale, yScale, commits); // ✅ Add brushing
+  addBrush(svg, xScale, yScale, commits);
 }
 
 function addBrush(svg, xScale, yScale, commits) {
@@ -189,8 +191,8 @@ function renderLanguageBreakdown(selection, commits, xScale, yScale) {
   }
 
   const lines = selected.flatMap(d => d.lines);
-
   const breakdown = d3.rollup(lines, v => v.length, d => d.type);
+
   container.innerHTML = '';
   for (const [lang, count] of breakdown) {
     const percent = d3.format('.1%')(count / lines.length);
