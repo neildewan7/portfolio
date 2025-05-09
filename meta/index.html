@@ -3,29 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <title>Meta Analysis</title>
-  <script type="module" src="main.js"></script>
   <link rel="stylesheet" href="../style.css" />
   <script type="module" src="main.js"></script>
-
 </head>
 <body>
   <h1>Code Stats</h1>
   <p>This page shows stats about this website’s codebase.</p>
+
   <div id="stats"></div>
   <div id="chart"></div>
+
   <dl id="commit-tooltip" class="info tooltip" hidden>
     <dt>Commit</dt>
     <dd><a href="" id="commit-link" target="_blank"></a></dd>
-  
+
     <dt>Date</dt>
     <dd id="commit-date"></dd>
-  
+
     <dt>Author</dt>
     <dd id="commit-author"></dd>
-  
+
     <dt>Lines</dt>
     <dd id="commit-lines"></dd>
   </dl>
-  
+
+  <p id="selection-count">No commits selected</p>
+  <dl id="language-breakdown" class="stats"></dl>
+
 </body>
 </html>

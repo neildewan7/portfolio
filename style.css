@@ -315,3 +315,9 @@ circle {
 circle:hover {
   transform: scale(1.5);
 }
+
+circle.selected {
+  stroke: black;
+  stroke-width: 2px;
+  fill: #ff6b6b;
+}

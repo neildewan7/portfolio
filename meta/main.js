@@ -77,11 +77,9 @@ function renderScatterPlot(commits) {
   const width = 1000;
   const height = 600;
   const margin = { top: 10, right: 10, bottom: 30, left: 40 };
-
   const usableWidth = width - margin.left - margin.right;
 
-  const svg = d3
-    .select('#chart')
+  const svg = d3.select('#chart')
     .append('svg')
     .attr('viewBox', `0 0 ${width} ${height}`)
     .style('overflow', 'visible');
@@ -95,13 +93,14 @@ function renderScatterPlot(commits) {
     .domain([0, 24])
     .range([height - margin.bottom, margin.top]);
 
-  // Gridlines
+  const [minLines, maxLines] = d3.extent(commits, d => d.totalLines);
+  const rScale = d3.scaleSqrt().domain([minLines, maxLines]).range([2, 20]);
+
   svg.append('g')
     .attr('class', 'gridlines')
     .attr('transform', `translate(${margin.left}, 0)`)
     .call(d3.axisLeft(yScale).tickSize(-usableWidth).tickFormat(''));
 
-  // Axes
   svg.append('g')
     .attr('transform', `translate(0, ${height - margin.bottom})`)
     .call(d3.axisBottom(xScale));
@@ -110,28 +109,96 @@ function renderScatterPlot(commits) {
     .attr('transform', `translate(${margin.left}, 0)`)
     .call(d3.axisLeft(yScale).tickFormat(d => String(d % 24).padStart(2, '0') + ':00'));
 
-  // Dots with tooltip events
   svg.selectAll('circle')
     .data(commits)
     .join('circle')
     .attr('cx', d => xScale(d.datetime))
     .attr('cy', d => yScale(d.hourFrac))
-    .attr('r', 5)
+    .attr('r', d => rScale(d.totalLines))
     .attr('fill', 'steelblue')
+    .style('fill-opacity', 0.7)
     .on('mouseenter', (event, commit) => {
       renderTooltipContent(commit);
       updateTooltipVisibility(true);
       updateTooltipPosition(event);
+      d3.select(event.currentTarget).style('fill-opacity', 1);
     })
-    .on('mousemove', (event) => {
-      updateTooltipPosition(event);
-    })
-    .on('mouseleave', () => {
+    .on('mousemove', updateTooltipPosition)
+    .on('mouseleave', (event) => {
       updateTooltipVisibility(false);
+      d3.select(event.currentTarget).style('fill-opacity', 0.7);
     });
+
+  addBrush(svg, xScale, yScale, commits); // ✅ Add brushing
 }
 
-// Main
+function addBrush(svg, xScale, yScale, commits) {
+  function brushed(event) {
+    const selection = event.selection;
+    d3.selectAll('circle').classed('selected', (d) => {
+      const cx = xScale(d.datetime);
+      const cy = yScale(d.hourFrac);
+      return (
+        selection &&
+        cx >= selection[0][0] &&
+        cx <= selection[1][0] &&
+        cy >= selection[0][1] &&
+        cy <= selection[1][1]
+      );
+    });
+
+    renderSelectionCount(selection, commits, xScale, yScale);
+    renderLanguageBreakdown(selection, commits, xScale, yScale);
+  }
+
+  svg.append('g')
+    .attr('class', 'brush')
+    .call(d3.brush().on('start brush end', brushed));
+
+  svg.selectAll('.dots, .overlay ~ *').raise();
+}
+
+function getSelectedCommits(selection, commits, xScale, yScale) {
+  if (!selection) return [];
+  return commits.filter(d => {
+    const cx = xScale(d.datetime);
+    const cy = yScale(d.hourFrac);
+    return (
+      cx >= selection[0][0] &&
+      cx <= selection[1][0] &&
+      cy >= selection[0][1] &&
+      cy <= selection[1][1]
+    );
+  });
+}
+
+function renderSelectionCount(selection, commits, xScale, yScale) {
+  const selected = getSelectedCommits(selection, commits, xScale, yScale);
+  const count = selected.length;
+  const countElement = document.getElementById('selection-count');
+  countElement.textContent = count === 0 ? 'No commits selected' : `${count} commits selected`;
+}
+
+function renderLanguageBreakdown(selection, commits, xScale, yScale) {
+  const container = document.getElementById('language-breakdown');
+  const selected = getSelectedCommits(selection, commits, xScale, yScale);
+
+  if (selected.length === 0) {
+    container.innerHTML = '';
+    return;
+  }
+
+  const lines = selected.flatMap(d => d.lines);
+
+  const breakdown = d3.rollup(lines, v => v.length, d => d.type);
+  container.innerHTML = '';
+  for (const [lang, count] of breakdown) {
+    const percent = d3.format('.1%')(count / lines.length);
+    container.innerHTML += `<dt>${lang}</dt><dd>${count} lines (${percent})</dd>`;
+  }
+}
+
+// Load and run
 const data = await loadData();
 const commits = processCommits(data);
 renderCommitInfo(data, commits);
