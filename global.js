@@ -51,6 +51,7 @@ let pages = [
   { url: "projects/", title: "Projects" },
   { url: "resume/", title: "Resume" },
   { url: "contact/", title: "Contact" },
+  { url: "meta/", title: "Meta" },   // ✅ Add this line
   { url: "https://github.com/neildewan7", title: "GitHub" }
 ];
 
