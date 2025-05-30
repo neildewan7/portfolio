@@ -4,15 +4,83 @@
   <meta charset="UTF-8">
   <title>Meta Analysis</title>
   <link rel="stylesheet" href="../style.css" />
-  <script type="module" src="../global.js"></script> <!-- ✅ Import global nav logic -->
+  <script type="module" src="../global.js"></script>
   <script type="module" src="main.js"></script>
+  <style>
+    .stats-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-top: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .stats-grid > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 100px;
+    }
+
+    .stats-grid dt {
+      font-size: 0.75rem;
+      color: #666;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .stats-grid dd {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #222;
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
 
   <h1>Code Stats</h1>
   <p>This page shows stats about this website’s codebase.</p>
 
-  <div id="stats"></div>
+  <!-- Slider for filtering commits by time -->
+  <div id="commit-slider">
+    <label>
+      Show commits until:
+      <input type="range" id="commit-progress" min="0" max="100" value="100" />
+      <time id="commit-time"></time>
+    </label>
+  </div>
+
+  <!-- ✅ Stats row -->
+  <div id="stats" class="stats-grid">
+    <div>
+      <dt>COMMITS</dt>
+      <dd id="stat-commits">0</dd>
+    </div>
+    <div>
+      <dt>FILES</dt>
+      <dd id="stat-files">0</dd>
+    </div>
+    <div>
+      <dt>TOTAL <abbr title="Lines of Code">LOC</abbr></dt>
+      <dd id="stat-loc">0</dd>
+    </div>
+    <div>
+      <dt>MAX DEPTH</dt>
+      <dd id="stat-depth">0</dd>
+    </div>
+    <div>
+      <dt>LONGEST LINE</dt>
+      <dd id="stat-line">0</dd>
+    </div>
+    <div>
+      <dt>MAX LINES</dt>
+      <dd id="stat-maxlines">0</dd>
+    </div>
+  </div>
 
   <!-- ✅ Chart heading -->
   <h2>Commits by Time of Day</h2>
