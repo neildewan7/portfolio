@@ -15,10 +15,7 @@ body {
 
 nav {
   display: flex;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  --border-color: oklch(50% 10% 240 / 40%);
-  border-bottom-color: var(--border-color);
+  border-bottom: 1px solid oklch(50% 10% 240 / 40%);
 }
 
 nav a {
@@ -31,9 +28,7 @@ nav a {
 
 nav a.current,
 nav a:hover {
-  border-bottom-width: 0.4em;
-  border-bottom-style: solid;
-  border-bottom-color: var(--border-color);
+  border-bottom: 0.4em solid oklch(50% 10% 240 / 40%);
   background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
 }
 
@@ -303,7 +298,7 @@ circle.selected {
   fill: #ff6b6b;
 }
 
-/* ✅ NEW: Top stats bar styling */
+/* ✅ Stats Grid */
 .stats-grid {
   display: flex;
   flex-wrap: wrap;
@@ -335,30 +330,38 @@ circle.selected {
   color: #222;
   margin: 0;
 }
+
+/* ✅ Files + LOC Display */
 #files {
   display: grid;
   grid-template-columns: 1fr 4fr;
   gap: 0.25rem 1rem;
   margin-block: 2rem;
-
-  > div {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: subgrid;
-    padding: 0.25rem 0;
-    border-bottom: 1px solid var(--gray);
-  }
-
-  dt {
-    grid-column: 1;
-    font-family: var(--font-mono);
-  }
-
-  dd {
-    grid-column: 2;
-    margin: 0;
-  }
 }
+
+#files > div {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid var(--gray);
+}
+
+#files dt {
+  grid-column: 1;
+  font-family: var(--font-mono);
+}
+
+#files dd {
+  grid-column: 2;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15em;
+  padding-top: 0.6em;
+}
+
+/* ✅ Individual LOC bubbles */
 .loc {
   display: flex;
   width: 0.5em;
@@ -367,14 +370,61 @@ circle.selected {
   border-radius: 50%;
 }
 
-#files dd {
-  grid-column: 2;
+/* ✅ Scrollytelling Layout */
+#scrolly-1 {
   display: flex;
-  flex-wrap: wrap;
-  align-items: start;
-  align-content: start;
-  gap: 0.15em;
-  padding-top: 0.6em;
-  margin-left: 0;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
+#scatter-story {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 80vh;
+}
+
+#scatter-plot {
+  flex: 1;
+  position: sticky;
+  top: 2rem;
+  height: calc(100vh - 4rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+#chart {
+  flex-grow: 1;
+  height: 100%;
+}
+
+.step {
+  margin: 0;
+  padding: 2rem;
+  background: #f0f0f0;
+  border-left: 4px solid #333;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+#stats-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: white; /* or canvas, depending on color-scheme */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding-bottom: 0.5rem;
+  height: 3.5rem; /* ✅ fixed height */
+}
+
+#scatter-plot {
+  flex: 1;
+  position: sticky;
+  top: 4.5rem; /* ✅ leaves space for stats bar */
+  height: calc(100vh - 5rem); /* ✅ adjusted to avoid clipping */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
