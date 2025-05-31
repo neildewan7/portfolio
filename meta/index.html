@@ -38,21 +38,21 @@
       color: #222;
       margin: 0;
     }
+
+    #commit-slider {
+      margin-top: 2rem;
+    }
+    #commit-progress {
+  width: 600px; /* or any desired width */
+  margin-left: 1rem;
+  vertical-align: middle;
+}
   </style>
 </head>
 <body>
 
   <h1>Code Stats</h1>
   <p>This page shows stats about this website’s codebase.</p>
-
-  <!-- Slider for filtering commits by time -->
-  <div id="commit-slider">
-    <label>
-      Show commits until:
-      <input type="range" id="commit-progress" min="0" max="100" value="100" />
-      <time id="commit-time"></time>
-    </label>
-  </div>
 
   <!-- ✅ Stats row -->
   <div id="stats" class="stats-grid">
@@ -85,6 +85,18 @@
   <!-- ✅ Chart heading -->
   <h2>Commits by Time of Day</h2>
   <div id="chart"></div>
+
+  <!-- ✅ Slider moved below the chart -->
+  <div id="commit-slider">
+    <label>
+      Show commits until:
+      <input type="range" id="commit-progress" min="0" max="100" value="100" />
+      <time id="commit-time"></time>
+    </label>
+  </div>
+
+  <!-- ✅ Unit visualization (file blocks) -->
+  <dl id="files"></dl>
 
   <!-- Tooltip shown on hover -->
   <dl id="commit-tooltip" class="info tooltip" hidden>

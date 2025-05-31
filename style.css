@@ -335,3 +335,46 @@ circle.selected {
   color: #222;
   margin: 0;
 }
+#files {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 0.25rem 1rem;
+  margin-block: 2rem;
+
+  > div {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid var(--gray);
+  }
+
+  dt {
+    grid-column: 1;
+    font-family: var(--font-mono);
+  }
+
+  dd {
+    grid-column: 2;
+    margin: 0;
+  }
+}
+.loc {
+  display: flex;
+  width: 0.5em;
+  aspect-ratio: 1;
+  background: var(--color, steelblue);
+  border-radius: 50%;
+}
+
+#files dd {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  align-content: start;
+  gap: 0.15em;
+  padding-top: 0.6em;
+  margin-left: 0;
+}
+

@@ -1,5 +1,6 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 
+let colors = d3.scaleOrdinal(d3.schemeTableau10);
 async function loadData() {
   const data = await d3.csv('loc.csv', (row) => ({
     ...row,
@@ -103,6 +104,8 @@ function renderScatterPlot(commits) {
     .call(d3.axisLeft(yScale).tickFormat(d => String(d % 24).padStart(2, '0') + ':00'));
 
   svg.append('g').attr('class', 'dots');
+
+  addBrush(svg, xScale, yScale, commits);
 }
 
 function updateScatterPlot(data, commits) {
@@ -132,9 +135,13 @@ function updateScatterPlot(data, commits) {
       updateTooltipVisibility(false);
       d3.select(event.currentTarget).style('fill-opacity', 0.7);
     });
+
+  addBrush(svg, xScale, yScale, commits); // re-attach brush
 }
 
 function addBrush(svg, xScale, yScale, commits) {
+  svg.selectAll('.brush').remove();
+
   function brushed(event) {
     const selection = event.selection;
     d3.selectAll('circle').classed('selected', d => {
@@ -149,7 +156,7 @@ function addBrush(svg, xScale, yScale, commits) {
     renderLanguageBreakdown(selection, commits, xScale, yScale);
   }
 
-  d3.select('#chart svg').append('g')
+  svg.append('g')
     .attr('class', 'brush')
     .call(d3.brush().on('start brush end', brushed));
 }
@@ -171,8 +178,7 @@ function getSelectedCommits(selection, commits, xScale, yScale) {
 function renderSelectionCount(selection, commits, xScale, yScale) {
   const selected = getSelectedCommits(selection, commits, xScale, yScale);
   const count = selected.length;
-  const countElement = document.getElementById('selection-count');
-  countElement.textContent = count === 0 ? 'No commits selected' : `${count} commits selected`;
+  document.getElementById('selection-count').textContent = count === 0 ? 'No commits selected' : `${count} commits selected`;
 }
 
 function renderLanguageBreakdown(selection, commits, xScale, yScale) {
@@ -192,6 +198,33 @@ function renderLanguageBreakdown(selection, commits, xScale, yScale) {
     const percent = d3.format('.1%')(count / lines.length);
     container.innerHTML += `<dt>${lang}</dt><dd>${count} lines (${percent})</dd>`;
   }
+}
+
+function updateFileDisplay(filteredCommits) {
+  let lines = filteredCommits.flatMap(d => d.lines);
+  let files = d3.groups(lines, d => d.file).map(([name, lines]) => ({ name, lines }))
+    .sort((a, b) => b.lines.length - a.lines.length);
+
+  const filesContainer = d3
+    .select('#files')
+    .selectAll('div')
+    .data(files, d => d.name)
+    .join(enter =>
+      enter.append('div').call(div => {
+        div.append('dt').append('code');
+        div.append('dd');
+      })
+    );
+
+  filesContainer
+    .attr('style', d => `--color: ${colors(d.lines[0].type)}`)
+    .select('dt > code')
+    .text(d => d.name);
+    filesContainer.select('dd').selectAll('div')
+    .data(d => d.lines)
+    .join('div')
+    .attr('class', 'loc')
+    .style('background', d => colors(d.type));
 }
 
 // Load and run
@@ -217,6 +250,7 @@ function onTimeSliderChange() {
 
   updateScatterPlot(data, filteredCommits);
   updateCommitInfo(filteredData, filteredCommits);
+  updateFileDisplay(filteredCommits); // ✅ ADDED this
 }
 
 document.getElementById('commit-progress').addEventListener('input', onTimeSliderChange);
