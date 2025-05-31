@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Meta Analysis</title>
-  <link rel="stylesheet" href="../style.css" />
-  <script type="module" src="main.js"></script>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Meta Analysis</title>
+    <link rel="stylesheet" href="../style.css" />
+    <script type="module" src="../global.js"></script> <!-- ✅ Add this line -->
+    <script type="module" src="main.js"></script>
+  </head>
+  
 <body>
+
+  <!-- ✅ Nav bar placeholder — JS will fill this -->
+  <nav></nav>
 
   <!-- ✅ Page Title -->
   <h1>Code Stats</h1>
@@ -26,10 +31,7 @@
 
   <!-- ✅ Scrollytelling Layout -->
   <div id="scrolly-1">
-    <!-- Narrative text -->
     <div id="scatter-story"></div>
-
-    <!-- Chart and feedback -->
     <div id="scatter-plot">
       <div id="chart"></div>
       <dl id="language-breakdown" class="stats"></dl>
@@ -48,4 +50,5 @@
   </dl>
 
 </body>
+
 </html>
